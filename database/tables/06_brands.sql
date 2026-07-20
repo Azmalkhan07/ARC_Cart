@@ -1,0 +1,11 @@
+﻿CREATE TABLE brands (
+  id          INT PRIMARY KEY AUTO_INCREMENT,
+  name        VARCHAR(100) NOT NULL UNIQUE,
+  slug        VARCHAR(120) NOT NULL UNIQUE,
+  logo_url    VARCHAR(500),
+  is_active   BOOLEAN DEFAULT TRUE,
+  created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  created_by  BIGINT NULL,
+  INDEX idx_brands_slug (slug)
+);

@@ -1,0 +1,6 @@
+﻿CREATE TABLE roles (
+  id          TINYINT PRIMARY KEY,
+  name        VARCHAR(20) NOT NULL UNIQUE,
+  description VARCHAR(100),
+  created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

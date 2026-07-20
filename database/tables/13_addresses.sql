@@ -1,0 +1,20 @@
+﻿CREATE TABLE addresses (
+  id             BIGINT PRIMARY KEY AUTO_INCREMENT,
+  user_id        BIGINT NOT NULL,
+  label          VARCHAR(50) DEFAULT 'Home',
+  full_name      VARCHAR(100) NOT NULL,
+  phone          VARCHAR(15) NOT NULL,
+  address_line1  VARCHAR(200) NOT NULL,
+  address_line2  VARCHAR(200),
+  city           VARCHAR(100) NOT NULL,
+  state          VARCHAR(100) NOT NULL,
+  pincode        VARCHAR(10) NOT NULL,
+  country        VARCHAR(50) DEFAULT 'India',
+  is_default     BOOLEAN DEFAULT FALSE,
+  is_deleted     BOOLEAN DEFAULT FALSE,
+  deleted_at     TIMESTAMP NULL,
+  created_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id),
+  INDEX idx_addresses_user (user_id)
+);

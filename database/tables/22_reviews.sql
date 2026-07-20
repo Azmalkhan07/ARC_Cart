@@ -1,0 +1,21 @@
+﻿CREATE TABLE reviews (
+  id              BIGINT PRIMARY KEY AUTO_INCREMENT,
+  user_id         BIGINT NOT NULL,
+  product_id      BIGINT NOT NULL,
+  order_item_id   BIGINT NOT NULL,
+  rating          TINYINT NOT NULL CHECK (rating BETWEEN 1 AND 5),
+  title           VARCHAR(150),
+  body            TEXT,
+  is_verified     BOOLEAN DEFAULT TRUE,
+  is_deleted      BOOLEAN DEFAULT FALSE,
+  deleted_at      TIMESTAMP NULL,
+  created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  created_by      BIGINT NULL,
+  FOREIGN KEY (user_id) REFERENCES users(id),
+  FOREIGN KEY (product_id) REFERENCES products(id),
+  FOREIGN KEY (order_item_id) REFERENCES order_items(id),
+  UNIQUE KEY uq_review_user_product (user_id, product_id),
+  INDEX idx_reviews_product (product_id),
+  INDEX idx_reviews_rating (rating)
+);

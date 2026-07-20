@@ -1,0 +1,21 @@
+﻿CREATE TABLE payments (
+  id                   BIGINT PRIMARY KEY AUTO_INCREMENT,
+  order_id             BIGINT NOT NULL UNIQUE,
+  razorpay_order_id    VARCHAR(100),
+  razorpay_payment_id  VARCHAR(100),
+  razorpay_signature   VARCHAR(300),
+  amount               DECIMAL(12,2) NOT NULL,
+  currency             VARCHAR(3) DEFAULT 'INR',
+  status               ENUM('PENDING','COMPLETED','FAILED','REFUND_INITIATED','REFUNDED') DEFAULT 'PENDING',
+  method               VARCHAR(50),
+  error_code           VARCHAR(100),
+  error_description    VARCHAR(300),
+  paid_at              TIMESTAMP NULL,
+  refunded_at          TIMESTAMP NULL,
+  refund_id            VARCHAR(100),
+  created_at           TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at           TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (order_id) REFERENCES orders(id),
+  INDEX idx_payments_razorpay_order (razorpay_order_id),
+  INDEX idx_payments_status (status)
+);

@@ -1,0 +1,21 @@
+﻿CREATE TABLE banners (
+  id           INT PRIMARY KEY AUTO_INCREMENT,
+  title        VARCHAR(150) NOT NULL,
+  subtitle     VARCHAR(200),
+  image_url    VARCHAR(500) NOT NULL,
+  public_id    VARCHAR(200),
+  link_url     VARCHAR(300),
+  type         ENUM('HERO','PROMO','CATEGORY','SIDEBAR') DEFAULT 'HERO',
+  position     INT DEFAULT 0,
+  is_active    BOOLEAN DEFAULT TRUE,
+  starts_at    TIMESTAMP NULL,
+  ends_at      TIMESTAMP NULL,
+  is_deleted   BOOLEAN DEFAULT FALSE,
+  deleted_at   TIMESTAMP NULL,
+  created_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  created_by   BIGINT NULL,
+  updated_by   BIGINT NULL,
+  INDEX idx_banners_type_active (type, is_active),
+  INDEX idx_banners_dates (starts_at, ends_at)
+);

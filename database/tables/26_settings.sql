@@ -1,0 +1,13 @@
+﻿CREATE TABLE settings (
+  id            BIGINT PRIMARY KEY AUTO_INCREMENT,
+  user_id       BIGINT NOT NULL UNIQUE,
+  theme         ENUM('LIGHT','DARK') DEFAULT 'LIGHT',
+  language      VARCHAR(10) DEFAULT 'en',
+  email_notif   BOOLEAN DEFAULT TRUE,
+  push_notif    BOOLEAN DEFAULT TRUE,
+  promo_notif   BOOLEAN DEFAULT TRUE,
+  order_notif   BOOLEAN DEFAULT TRUE,
+  privacy_mode  BOOLEAN DEFAULT FALSE,
+  updated_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
